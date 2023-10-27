@@ -60,8 +60,7 @@ int main(int ac, char **av)
 
 	while (getline(&line, &size, file) != EOF)
 	{
-		line[strlen(line) - 1] = 0;
-		nbr = _atoi(line);
+		nbr = atoi(line);
 		i = 2;
 		while (i <= (nbr / 2))
 		{

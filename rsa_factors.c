@@ -1,9 +1,4 @@
-#define  _GNU_SOURCE
-#include <string.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "rsa_factors.h"
 /**
 * _atoi - Convert a string to an integer.
 * @s: String input.
@@ -38,6 +33,8 @@ int _atoi(char *s)
 }
 /**
  * main - main Rsa Implementation in the code
+ * @ac: arg nbrs
+ * @av: details args
  *
  * Return: Always 0.
  */
@@ -48,7 +45,7 @@ int main(int ac, char **av)
 	size_t size;
 	size_t  nbr, i;
 
-	if(ac != 2)
+	if (ac != 2)
 	{
 		fprintf(stderr, "Usage: factors <file>\n");
 		return (EXIT_FAILURE);
@@ -57,9 +54,8 @@ int main(int ac, char **av)
 
 	if (!file)
 	{
-		fprintf(stderr, "Error Opnnig file : %s check permissions\n",
-				av[1]);
-		return(EXIT_FAILURE);
+		fprintf(stderr, "Error  file : %s check permisions\n", av[1]);
+		return (EXIT_FAILURE);
 	}
 
 	while (getline(&line, &size, file) != EOF)
@@ -71,7 +67,7 @@ int main(int ac, char **av)
 		{
 			if (nbr % i == 0)
 			{
-				printf("%ld=%ld*%ld\n", nbr, nbr/i, i);
+				printf("%ld=%ld*%ld\n", nbr, nbr / i, i);
 				i = nbr;
 			}
 			i++;

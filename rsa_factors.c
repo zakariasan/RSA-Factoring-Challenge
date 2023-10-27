@@ -1,6 +1,7 @@
 #include "rsa_factors.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * main - main Rsa Implementation in the code
@@ -14,7 +15,8 @@ int main(int ac, char **av)
 	FILE *file;
 	char *line;
 	size_t size;
-	size_t nbr, i;
+	unsigned long nbr, i;
+	char *delim;
 
 	if (ac != 2)
 	{
@@ -31,15 +33,18 @@ int main(int ac, char **av)
 
 	while (getline(&line, &size, file) != EOF)
 	{
-		nbr = atoll(line);
+		nbr = strtoul(line, &delim, 10);
 		i = 2;
+		if (nbr < 1 || *delim != '\n')
+			continue;
 		while (i <= (nbr / 2))
 		{
 			if (nbr % i == 0)
 			{
-				printf("%ld=%ld*%ld\n", nbr, nbr / i, i);
-				i = nbr + 2;
+				printf("%lu=%lu*%lu\n", nbr, nbr / i, i);
+				break;
 			}
+
 			i++;
 		}
 	}

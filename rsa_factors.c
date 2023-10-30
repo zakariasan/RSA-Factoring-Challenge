@@ -15,9 +15,8 @@ int main(int ac, char **av)
 	FILE *file;
 	char *line;
 	size_t size;
-	unsigned long nbr, i;
-	char *delim;
-
+	unsigned long long  nbr, i;
+	char *dl;
 	if (ac != 2)
 	{
 		fprintf(stderr, "Usage: factors <file>\n");
@@ -33,15 +32,14 @@ int main(int ac, char **av)
 
 	while (getline(&line, &size, file) != EOF)
 	{
-		nbr = strtoul(line, &delim, 10);
+
+		nbr = strtoull(line, &dl, 10);
 		i = 2;
-		if (nbr < 1 || *delim != '\n')
-			continue;
 		while (i <= (nbr / 2))
 		{
 			if (nbr % i == 0)
 			{
-				printf("%lu=%lu*%lu\n", nbr, nbr / i, i);
+				printf("%llu=%llu*%llu\n", nbr, nbr / i, i);
 				break;
 			}
 
